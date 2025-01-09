@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex04 Example</title>
+</head>
+<body>
+  
+<h1>Sample DTO and Page</h1>
+
+<!-- SampleDTO 출력 -->
+<p><strong>SampleDTO:</strong> <span th:text="${dto}"></span></p>
+
+<!-- Page 출력 -->
+<p><strong>Page:</strong> <span th:text="${page}"></span></p>
+
+<!-- 쿼리 파라미터로 값을 입력받기 위한 폼 -->
+<!-- <form action="/ex04" method="get">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="${dto.name}" />
+
+    <label for="age">Age:</label>
+    <input type="text" id="age" name="age" th:value="${dto.age}" />
+
+    <label for="page">Page:</label>
+    <input type="text" id="page" name="page" th:value="${page}" />
+
+    <button type="submit">Submit</button>
+</form> -->
+
+</body>
+</html>
