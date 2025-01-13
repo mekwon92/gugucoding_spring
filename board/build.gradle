@@ -4,11 +4,6 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
-configurations {
-	all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-	all*.exclude group: 'org.springframework.boot', module: 'logback-classic'
-}
-
 group = 'com.me92100984'
 version = '0.0.1-SNAPSHOT'
 
@@ -16,6 +11,11 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+}
+
+configurations {
+	all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	all*.exclude group: 'org.springframework.boot', module: 'logback-classic'
 }
 
 configurations {
@@ -71,25 +71,8 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
 	implementation 'commons-fileupload:commons-fileupload:1.3.3'
-
-
-
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-sourceSets {
-    main.java.srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
-}
-
-tasks.compileJava {
-    // QueryDSL 파일 생성 디렉토리 삭제(빌드 전에 Q삭제)
-    doFirst {
-        def generatedDir = file("$projectDir/build/generated")
-        if (generatedDir.exists()) {
-            println "Cleaning QueryDSL generated directory: ${generatedDir}"
-            generatedDir.deleteDir()
-        }
-    }
 }

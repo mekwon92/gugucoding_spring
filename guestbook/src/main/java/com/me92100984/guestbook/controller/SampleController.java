@@ -21,10 +21,14 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.me92100984.guestbook.domain.SampleDTO;
 import com.me92100984.guestbook.domain.SampleDTOList;
 import com.me92100984.guestbook.domain.TodoDTO;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -120,6 +124,25 @@ public class SampleController {
     headers.add("Content-Type", "application/json; charset=UTF-8");
 
     return new ResponseEntity<>(msg, headers, HttpStatus.OK);
+  }
+  
+  //보여주는 주소
+  @GetMapping("exUpload")
+  public String exUpload() {
+      log.info("/exUpload...........");
+      return "sample/exUpload";
+  }
+  
+  @PostMapping("exUpload") 
+  //파라미터로 받아오는 이름(files)는 input의 name과 일치해야 함
+  //form의 action은 @PostMapping의 주소와 일치해야 함.(리디렉션은 어디로보내든지 상관없음)
+  public String exUploadPost(@RequestParam("files") ArrayList<MultipartFile> files) {
+      files.forEach(file -> {
+          log.info("========================");
+          log.info("File Name: " + file.getOriginalFilename());
+          log.info("File Size: " + file.getSize());
+      });
+      return "redirect:exUpload"; 
   }
   
   
